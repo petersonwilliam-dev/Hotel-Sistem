@@ -1,17 +1,16 @@
 package hotel.room.state;
 
 public enum Availability {
-
     AVAILABLE(true),
     UNAVAILABLE(false);
 
-    private boolean available;
+    private boolean isAvailable;
 
-    Availability(boolean availability) {
-        this.available = availability;
+    Availability(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 
     public boolean isAvailable() {
-        return available;
+        return isAvailable;
     }
 }
