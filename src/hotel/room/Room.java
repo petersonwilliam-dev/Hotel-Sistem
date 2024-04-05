@@ -9,7 +9,7 @@ public class Room {
     private int number;
     private String type;
     private String description;
-    private Availability isAvailable;
+    private Availability availability;
     private int capacity;
     private double price;
 
@@ -17,7 +17,7 @@ public class Room {
         this.number = number;
         this.type = type;
         this.description = description;
-        this.isAvailable = Availability.valueOf(isAvailable);
+        this.availability = Availability.valueOf(isAvailable);
         this.capacity = capacity;
         this.price = price;
     }
@@ -34,8 +34,8 @@ public class Room {
         return description;
     }
 
-    public Availability getAvailable() {
-        return isAvailable;
+    public Availability getAvailability() {
+        return availability;
     }
 
     public int getCapacity() {
@@ -60,11 +60,11 @@ public class Room {
 
     @Override
     public String toString() {
-        return "=-=-=-=-=-= ROOM "+getNumber()+" =-=-=-=-=-= \n"+
+        return "\n=-=-=-=-=-= ROOM "+getNumber()+" =-=-=-=-=-= \n"+
                 "Type: " + getType()+"\n"+
                 "Capacity: " + getCapacity() + "\n"+
                 "Price: R$"+getPrice()+"\n"+
-                "Is available: " + getAvailable()+"\n"+
+                "Is available: " + getAvailability()+"\n"+
                 "Description: " + getDescription();
     }
 }
