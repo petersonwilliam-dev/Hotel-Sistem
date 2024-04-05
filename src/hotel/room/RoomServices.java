@@ -21,7 +21,7 @@ public class RoomServices {
 
     public Room getRoomByNumber(int numberRoom) throws SQLException{
         ResultSet resultSet = new RoomDAO().getRoom(numberRoom);
-        
+
         if (resultSet.next()) {
             int number = resultSet.getInt(1);
             String type = resultSet.getString(2);
