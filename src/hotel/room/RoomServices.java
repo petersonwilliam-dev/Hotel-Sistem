@@ -19,6 +19,23 @@ public class RoomServices {
         return listRooms;
     }
 
+    public Room getRoomByNumber(int numberRoom) throws SQLException{
+        ResultSet resultSet = new RoomDAO().getRoom(numberRoom);
+        
+        if (resultSet.next()) {
+            int number = resultSet.getInt(1);
+            String type = resultSet.getString(2);
+            String description = resultSet.getString(3);
+            String availability = resultSet.getString(4);
+            int capacity = resultSet.getInt(5);
+            double price = resultSet.getDouble(6);
+            resultSet.close();
+            return new Room(number, type, description, availability, capacity, price);
+        }
+
+        return null;
+    }
+
     public void alterRoom(Room room) throws SQLException{
         new RoomDAO().editRoom(room);
     }

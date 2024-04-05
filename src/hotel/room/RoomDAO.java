@@ -24,6 +24,16 @@ public class RoomDAO {
         return preparedStatement.getResultSet();
     }
 
+    public ResultSet getRoom(int number) throws SQLException{
+        String sql = "SELECT * FROM rooms WHERE number = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, number);
+        preparedStatement.execute();
+
+        return preparedStatement.getResultSet();
+    }
+
     public void editRoom(Room room) throws SQLException{
 
         String sql = "UPDATE rooms SET availability = ? WHERE number = ?";
