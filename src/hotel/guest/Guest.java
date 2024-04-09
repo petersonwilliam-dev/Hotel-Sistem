@@ -1,6 +1,7 @@
 package hotel.guest;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Guest {
 
@@ -70,4 +71,25 @@ public class Guest {
         return identificationCard;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Guest guest)) return false;
+        return Objects.equals(getITR(), guest.getITR());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getITR());
+    }
+
+    @Override
+    public String toString() {
+        return "=============================== \n" +
+                "Guest "+getName()+" "+getSurname()+
+                "\nDate Of Birth: "+getDateOfBirth()+
+                "\nITR: "+getITR()+
+                "\nIdentification: " + getIdentificationCard() +
+                "\nNumber phone: " + getNumberPhone();
+    }
 }
