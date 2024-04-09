@@ -1,5 +1,6 @@
 import hotel.guest.Guest;
 import hotel.guest.GuestDAO;
+import hotel.guest.GuestServices;
 import hotel.room.Room;
 import hotel.room.RoomServices;
 
