@@ -12,23 +12,27 @@ public class Guest {
     private String ITR;
     private String numberPhone;
     private String identificationCard;
+    private String password;
 
-    public Guest(String name, String surname, LocalDate dateOfBirth,  String ITR, String numberPhone, String identificationCard) {
+    public Guest(String name, String surname, LocalDate dateOfBirth,  String ITR, String numberPhone, String identificationCard, String password) {
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.ITR = ITR;
         this.numberPhone = numberPhone;
         this.identificationCard = identificationCard;
+        this.password = password;
     }
 
-    public Guest(int id, String name, String surname, LocalDate dateOfBirth, String ITR, String numberPhone, String identificationCard) {
+    public Guest(int id, String name, String surname, LocalDate dateOfBirth, String ITR, String numberPhone, String identificationCard, String password) {
         this.id = id;
         this.name = name;
+        this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.ITR = ITR;
         this.numberPhone = numberPhone;
         this.identificationCard = identificationCard;
+        this.password = password;
     }
 
     public int getId() {

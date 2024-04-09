@@ -27,7 +27,7 @@ public class GuestDAO {
         preparedStatement.close();
     }
 
-    public ResultSet getAllGuests() throws SQLException{
+    public ResultSet AllGuests() throws SQLException{
 
         String sql = "SELECT * FROM guests";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
