@@ -12,7 +12,7 @@ public class RoomServices {
         List<Room> listRooms = new ArrayList<>();
 
         while (rooms.next()) {
-            Room room = new Room(rooms.getInt(1), rooms.getString(2), rooms.getString(3), rooms.getString(4), rooms.getInt(5), rooms.getDouble(6));
+            Room room = new Room(rooms.getInt(1), rooms.getString(2), rooms.getString(3), rooms.getInt(5), rooms.getDouble(6));
             listRooms.add(room);
         }
 
@@ -26,17 +26,12 @@ public class RoomServices {
             int number = resultSet.getInt(1);
             String type = resultSet.getString(2);
             String description = resultSet.getString(3);
-            String availability = resultSet.getString(4);
             int capacity = resultSet.getInt(5);
             double price = resultSet.getDouble(6);
             resultSet.close();
-            return new Room(number, type, description, availability, capacity, price);
+            return new Room(number, type, description, capacity, price);
         }
 
         return null;
-    }
-
-    public void alterRoom(Room room) throws SQLException{
-        new RoomDAO().editRoom(room);
     }
 }

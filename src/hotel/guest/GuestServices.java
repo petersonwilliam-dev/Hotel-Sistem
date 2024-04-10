@@ -42,22 +42,25 @@ public class GuestServices{
         }
     }
 
-    public Guest getGuestByITR(String ITR) throws Exception{
-        ResultSet resultSet = new GuestDAO().getGuest(ITR);
+    public Guest getGuest(String ITR, String password) throws Exception{
+        ResultSet resultSet = new GuestDAO().getGuestByITR(ITR);
         if (resultSet.next()) {
-            int id = resultSet.getInt(1);
-            String name = resultSet.getString(2);
-            String surname = resultSet.getString(3);
-            LocalDate dateOfBirth = resultSet.getDate(4).toLocalDate();
-            String ITRGuest = resultSet.getString(5);
-            String numberPhone = resultSet.getString(6);
-            String identificationCard = resultSet.getString(7);
-            String password = resultSet.getString(8);
-
-            return new Guest(id, name, surname, dateOfBirth, ITRGuest, numberPhone, identificationCard, password);
+            if (password.equals(resultSet.getString(8))) {
+                return new Guest(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getDate(4).toLocalDate(), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8));
+            } else {
+                throw new RuntimeException("INCORRECT PASSWORD!");
+            }
         } else {
             throw new RuntimeException("GUEST NOT FOUND!");
         }
+    }
+
+    public void editGuest(Guest guest) throws SQLException {
+        new GuestDAO().editGuest(guest);
+    }
+
+    public void deleteGuest(int id) throws SQLException{
+        new GuestDAO().deleteGuest(id);
     }
 
     private boolean ageIsValid(LocalDate dateOfBirth) {

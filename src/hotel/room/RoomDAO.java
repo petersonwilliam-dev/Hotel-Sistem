@@ -34,15 +34,4 @@ public class RoomDAO {
         return preparedStatement.getResultSet();
     }
 
-    public void editRoom(Room room) throws SQLException{
-
-        String sql = "UPDATE rooms SET availability = ? WHERE number = ?";
-
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, String.valueOf(room.getAvailability()));
-        preparedStatement.setInt(2, room.getNumber());
-
-        preparedStatement.execute();
-        preparedStatement.close();
-    }
 }

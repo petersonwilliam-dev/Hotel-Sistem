@@ -9,15 +9,13 @@ public class Room {
     private int number;
     private String type;
     private String description;
-    private Availability availability;
     private int capacity;
     private double price;
 
-    public Room(int number, String type, String description, String isAvailable, int capacity, double price) {
+    public Room(int number, String type, String description, int capacity, double price) {
         this.number = number;
         this.type = type;
         this.description = description;
-        this.availability = Availability.valueOf(isAvailable);
         this.capacity = capacity;
         this.price = price;
     }
@@ -32,10 +30,6 @@ public class Room {
 
     public String getDescription() {
         return description;
-    }
-
-    public Availability getAvailability() {
-        return availability;
     }
 
     public int getCapacity() {
@@ -64,7 +58,6 @@ public class Room {
                 "Type: " + getType()+"\n"+
                 "Capacity: " + getCapacity() + "\n"+
                 "Price: R$"+getPrice()+"\n"+
-                "Is available: " + getAvailability()+"\n"+
                 "Description: " + getDescription();
     }
 }
