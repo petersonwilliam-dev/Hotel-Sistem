@@ -1,7 +1,4 @@
 package hotel.room;
-
-import hotel.room.state.Availability;
-
 import java.util.Objects;
 
 public class Room {
@@ -10,14 +7,14 @@ public class Room {
     private String type;
     private String description;
     private int capacity;
-    private double price;
+    private double dailyValue;
 
     public Room(int number, String type, String description, int capacity, double price) {
         this.number = number;
         this.type = type;
         this.description = description;
         this.capacity = capacity;
-        this.price = price;
+        this.dailyValue = price;
     }
 
     public int getNumber() {
@@ -36,8 +33,8 @@ public class Room {
         return capacity;
     }
 
-    public double getPrice() {
-        return price;
+    public double getDailyValue() {
+        return dailyValue;
     }
 
     @Override
@@ -57,7 +54,7 @@ public class Room {
         return "\n=-=-=-=-=-= ROOM "+getNumber()+" =-=-=-=-=-= \n"+
                 "Type: " + getType()+"\n"+
                 "Capacity: " + getCapacity() + "\n"+
-                "Price: R$"+getPrice()+"\n"+
+                "Price: R$"+getDailyValue()+"\n"+
                 "Description: " + getDescription();
     }
 }
