@@ -1,4 +1,4 @@
-package hotel.reservationRoom;
+package hotel.roomReservation;
 
 import hotel.guest.Guest;
 import hotel.room.Room;
@@ -6,7 +6,7 @@ import hotel.room.Room;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class ReservationRoom {
+public class RoomReservation {
 
     private int id;
     private Guest guest;
@@ -15,7 +15,7 @@ public class ReservationRoom {
     private LocalDate departureDate;
     private double totalValueOfStay;
 
-    public ReservationRoom(Guest guest, Room room, LocalDate arrivalDate, LocalDate departureDate) {
+    public RoomReservation(Guest guest, Room room, LocalDate arrivalDate, LocalDate departureDate) {
         this.guest = guest;
         this.room = room;
         this.arrivalDate = arrivalDate;
@@ -23,7 +23,7 @@ public class ReservationRoom {
         this.totalValueOfStay = daysOfStayCalculator() * room.getDailyValue();
     }
 
-    public ReservationRoom(int id, Guest guest, Room room, LocalDate arrivalDate, LocalDate departureDate) {
+    public RoomReservation(int id, Guest guest, Room room, LocalDate arrivalDate, LocalDate departureDate) {
         this.id = id;
         this.guest = guest;
         this.room = room;
