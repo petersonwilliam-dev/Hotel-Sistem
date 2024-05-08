@@ -23,6 +23,15 @@ public class RoomReservation {
         this.totalValueOfStay = daysOfStayCalculator() * room.getDailyValue();
     }
 
+    public RoomReservation(int id, Guest guest, Room room, LocalDate arrivalDate, LocalDate departureDate, double totalValueOfStay) {
+        this.id = id;
+        this.guest = guest;
+        this.room = room;
+        this.arrivalDate = arrivalDate;
+        this.departureDate = departureDate;
+        this.totalValueOfStay = totalValueOfStay;
+    }
+
     public RoomReservation(int id, Guest guest, Room room, LocalDate arrivalDate, LocalDate departureDate) {
         this.id = id;
         this.guest = guest;
@@ -58,5 +67,16 @@ public class RoomReservation {
 
     private long daysOfStayCalculator() {
         return ChronoUnit.DAYS.between(this.arrivalDate, this.departureDate);
+    }
+
+    @Override
+    public String toString() {
+        return "=-=-=-=-=-=-=-= RESERVATION "+getId()+" =-=-=-=-=-=-=-=\n"+
+                "Guest: "+getGuest().getName()+"\n"+
+                "Number room: "+getRoom().getNumber()+"\n"+
+                "Arrival date: " + getArrivalDate() + "\n" +
+                "Departure day: " + getDepartureDate() + "\n" +
+                "Length of stay: " +daysOfStayCalculator() + " days\n"+
+                "Total value: R$"+ getTotalValueOfStay() + "\n";
     }
 }

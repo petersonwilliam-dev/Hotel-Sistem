@@ -47,6 +47,16 @@ public class GuestDAO {
         return preparedStatement.getResultSet();
     }
 
+    public ResultSet getGuestById(int id) throws SQLException{
+
+        String sql = "SELECT * FROM guests WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        preparedStatement.execute();
+
+        return preparedStatement.getResultSet();
+    }
+
     public void editGuest(Guest guest) throws SQLException{
 
         String sql = "UPDATE guests SET name = ?, surname = ?, number_phone = ?, password_guest = ? WHERE id = ?";

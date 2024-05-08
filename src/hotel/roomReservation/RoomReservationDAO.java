@@ -11,7 +11,8 @@ public class RoomReservationDAO {
     public RoomReservationDAO() throws SQLException {
         connection = ConnectionDB.getConnectionDB();
     }
-    public void addRoomReservations(RoomReservation roomReservation) throws SQLException {
+
+    public void addRoomReservation(RoomReservation roomReservation) throws SQLException {
 
         String sql = "INSERT INTO room_reservations (arrival_date, departure_date, total_value_of_stay, id_room, id_guest) VALUES (?, ?, ?, ?, ?)";
 
@@ -38,6 +39,17 @@ public class RoomReservationDAO {
     public ResultSet getRoomReservationById(int id) throws SQLException {
 
         String sql = "SELECT * FROM room_reservations WHERE id = ?";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1, id);
+        preparedStatement.execute();
+
+        return preparedStatement.getResultSet();
+    }
+
+    public ResultSet getGuestReservations(int id) throws SQLException{
+
+        String sql = "SELECT * FROM room_reservations WHERE id_guest = ?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);

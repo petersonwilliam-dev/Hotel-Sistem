@@ -12,11 +12,11 @@ public class RoomServices {
         List<Room> listRooms = new ArrayList<>();
 
         while (rooms.next()) {
-            int number = rooms.getInt(1);
-            String type = rooms.getString(2);
-            String description = rooms.getString(3);
-            int capacity = rooms.getInt(5);
-            double dailyValue = rooms.getDouble(6);
+            int number = rooms.getInt("number");
+            String type = rooms.getString("type");
+            String description = rooms.getString("description");
+            int capacity = rooms.getInt("capacity");
+            double dailyValue = rooms.getDouble("price");
             listRooms.add(new Room(number, type, description, capacity, dailyValue));
         }
 
@@ -27,11 +27,11 @@ public class RoomServices {
         ResultSet resultSet = new RoomDAO().getRoom(numberRoom);
 
         if (resultSet.next()) {
-            int number = resultSet.getInt(1);
-            String type = resultSet.getString(2);
-            String description = resultSet.getString(3);
-            int capacity = resultSet.getInt(5);
-            double dailyValue = resultSet.getDouble(6);
+            int number = resultSet.getInt("number");
+            String type = resultSet.getString("type");
+            String description = resultSet.getString("description");
+            int capacity = resultSet.getInt("capacity");
+            double dailyValue = resultSet.getDouble("price");
             resultSet.close();
             return new Room(number, type, description, capacity, dailyValue);
         }

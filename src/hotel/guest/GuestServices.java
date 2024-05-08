@@ -42,17 +42,33 @@ public class GuestServices{
         }
     }
 
-    public Guest getGuest(String ITR, String password) throws Exception{
+    public Guest getGuest(String ITR, String password) throws SQLException, RuntimeException{
         ResultSet resultSet = new GuestDAO().getGuestByITR(ITR);
         if (resultSet.next()) {
             if (password.equals(resultSet.getString(8))) {
-                return new Guest(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3), resultSet.getDate(4).toLocalDate(), resultSet.getString(5), resultSet.getString(6), resultSet.getString(7), resultSet.getString(8));
+                return new Guest(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getString("surname"), resultSet.getDate("date_of_birth").toLocalDate(), resultSet.getString("itr"), resultSet.getString("number_phone"), resultSet.getString("identification_card"), resultSet.getString("password_guest"));
             } else {
                 throw new RuntimeException("INCORRECT PASSWORD!");
             }
         } else {
             throw new RuntimeException("GUEST NOT FOUND!");
         }
+    }
+
+    public Guest getGuest(int id) throws SQLException{
+        ResultSet resultSet = new GuestDAO().getGuestById(id);
+        if (resultSet.next()) {
+            String name = resultSet.getString("name");
+            String surname = resultSet.getString("surname");
+            LocalDate dateOfBirth = resultSet.getDate("date_of_birth").toLocalDate();
+            String ITR = resultSet.getString("itr");
+            String numberPhone = resultSet.getString("number_phone");
+            String identificationCard = resultSet.getString("identification_card");
+            String password = resultSet.getString("password_guest");
+            resultSet.close();
+            return new Guest(id, name, surname, dateOfBirth, ITR, numberPhone, identificationCard, password);
+        }
+        return null;
     }
 
     public void editGuest(Guest guest) throws SQLException {

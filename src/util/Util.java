@@ -1,5 +1,6 @@
 package util;
 
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Util {
@@ -43,5 +44,13 @@ public class Util {
         }
 
         return Integer.parseInt(response);
+    }
+
+    public static LocalDate getLocalDate(Scanner scanner, String message) {
+        LocalDate response;
+        String date = getString(scanner, message);
+        response = LocalDate.parse(date);
+
+        return response;
     }
 }
