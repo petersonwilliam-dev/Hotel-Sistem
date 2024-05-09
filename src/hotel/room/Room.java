@@ -55,6 +55,6 @@ public class Room {
                 "Type: " + getType()+"\n"+
                 "Capacity: " + getCapacity() + "\n"+
                 "Price: R$"+getDailyValue()+"\n"+
-                "Description: " + getDescription();
+                "Description: " + getDescription()+"\n";
     }
 }

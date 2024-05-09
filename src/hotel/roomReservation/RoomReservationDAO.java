@@ -58,13 +58,16 @@ public class RoomReservationDAO {
         return preparedStatement.getResultSet();
     }
 
-    public void deleteRoomReservation(int id) throws SQLException {
+    public void deleteRoomReservation(int id) throws SQLException, RuntimeException{
 
         String sql = "DELETE FROM room_reservations WHERE id = ?";
 
         PreparedStatement preparedStatement  = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
-        preparedStatement.execute();
+        int affectedLines = preparedStatement.executeUpdate();
         preparedStatement.close();
+        if (affectedLines == 0) {
+            throw new RuntimeException("THIS RESERVATION DOES NOT EXISTS");
+        }
     }
 }

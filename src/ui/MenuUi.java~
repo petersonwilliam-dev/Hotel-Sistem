@@ -15,9 +15,4 @@ public class MenuUi {
         System.out.println("2 - MY RESERVATIONS");
         System.out.println("3 - LOGOUT");
     }
-
-    public static void menuGuestReservations() {
-        System.out.println("1 - REMOVE RESERVATION");
-        System.out.println("2 - BACK");
-    }
 }

@@ -22,6 +22,8 @@ public class ConnectionDB {
     }
 
     public static void closeConnection() throws SQLException{
-        connection.close();
+        if (connection != null) {
+            connection.close();
+        }
     }
 }

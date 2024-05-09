@@ -8,7 +8,7 @@ import java.util.List;
 
 public class GuestServices{
 
-    public void createGuest(String name, String surname, LocalDate dateOfBirth, String ITR, String numberPhone, String identificationCard, String password) throws Exception{
+    public void createGuest(String name, String surname, LocalDate dateOfBirth, String ITR, String numberPhone, String identificationCard, String password) throws SQLException, RuntimeException{
         if (ageIsValid(dateOfBirth)) {
             if (ITRIsValid(ITR) && numberPhoneIsValid(numberPhone) && identificationCardIsValid(identificationCard)) {
                 Guest guest = new Guest(name, surname, dateOfBirth, ITR, numberPhone, identificationCard, password);
@@ -55,7 +55,7 @@ public class GuestServices{
         }
     }
 
-    public Guest getGuest(int id) throws SQLException{
+    public Guest getGuest(int id) throws SQLException, RuntimeException{
         ResultSet resultSet = new GuestDAO().getGuestById(id);
         if (resultSet.next()) {
             String name = resultSet.getString("name");
@@ -67,8 +67,9 @@ public class GuestServices{
             String password = resultSet.getString("password_guest");
             resultSet.close();
             return new Guest(id, name, surname, dateOfBirth, ITR, numberPhone, identificationCard, password);
+        } else {
+            throw new RuntimeException("GUEST NOT FOUND");
         }
-        return null;
     }
 
     public void editGuest(Guest guest) throws SQLException {

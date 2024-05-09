@@ -26,36 +26,46 @@ public class RoomReservationServices {
         List<RoomReservation> roomReservations = new ArrayList<>();
 
         while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            LocalDate arrivalDate = resultSet.getDate("arrival_date").toLocalDate();
-            LocalDate departureDate = resultSet.getDate("departure_date").toLocalDate();
-            double totalValueOfStay = resultSet.getDouble("total_value_of_stay");
-            Guest guest = new GuestServices().getGuest(resultSet.getInt("id_guest"));
-            Room room = new RoomServices().getRoomByNumber(resultSet.getInt("id_room"));
-            roomReservations.add(new RoomReservation(id, guest, room, arrivalDate, departureDate, totalValueOfStay));
+                int id = resultSet.getInt("id");
+                LocalDate arrivalDate = resultSet.getDate("arrival_date").toLocalDate();
+                LocalDate departureDate = resultSet.getDate("departure_date").toLocalDate();
+                double totalValueOfStay = resultSet.getDouble("total_value_of_stay");
+                Guest guest = new GuestServices().getGuest(resultSet.getInt("id_guest"));
+                Room room = new RoomServices().getRoomByNumber(resultSet.getInt("id_room"));
+                roomReservations.add(new RoomReservation(id, guest, room, arrivalDate, departureDate, totalValueOfStay));
         }
+
         resultSet.close();
-        return roomReservations;
+        if (!roomReservations.isEmpty()) {
+            return roomReservations;
+        } else {
+            throw new RuntimeException("NO RESERVATIONS MADE");
+        }
     }
 
     public List<RoomReservation> getGuestReservations(int idGuest) throws SQLException{
         ResultSet resultSet = new RoomReservationDAO().getGuestReservations(idGuest);
         List<RoomReservation> roomReservations = new ArrayList<>();
 
-        while (resultSet.next()) {
-            int id = resultSet.getInt("id");
-            LocalDate arrivalDate = resultSet.getDate("arrival_date").toLocalDate();
-            LocalDate departureDate = resultSet.getDate("departure_date").toLocalDate();
-            double totalValuOfStay = resultSet.getDouble("total_value_of_stay");
-            Guest guest = new GuestServices().getGuest(resultSet.getInt("id_guest"));
-            Room room = new RoomServices().getRoomByNumber(resultSet.getInt("id_room"));
-            roomReservations.add(new RoomReservation(id, guest, room, arrivalDate, departureDate, totalValuOfStay));
-        }
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                LocalDate arrivalDate = resultSet.getDate("arrival_date").toLocalDate();
+                LocalDate departureDate = resultSet.getDate("departure_date").toLocalDate();
+                double totalValuOfStay = resultSet.getDouble("total_value_of_stay");
+                Guest guest = new GuestServices().getGuest(resultSet.getInt("id_guest"));
+                Room room = new RoomServices().getRoomByNumber(resultSet.getInt("id_room"));
+                roomReservations.add(new RoomReservation(id, guest, room, arrivalDate, departureDate, totalValuOfStay));
+            }
+
         resultSet.close();
-        return roomReservations;
+        if (!roomReservations.isEmpty()) {
+            return roomReservations;
+        } else {
+            throw new RuntimeException("THERE ARE NO RESERVATIONS MADE BY YOU");
+        }
     }
 
-    public void deleteRoomReservation(int id) throws SQLException{
+    public void deleteRoomReservation(int id) throws SQLException, RuntimeException{
         new RoomReservationDAO().deleteRoomReservation(id);
     }
 

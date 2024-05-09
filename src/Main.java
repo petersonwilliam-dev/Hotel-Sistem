@@ -1,11 +1,4 @@
 import facade.Facade;
-import hotel.guest.Guest;
-import hotel.guest.GuestServices;
-import hotel.room.Room;
-import hotel.room.RoomDAO;
-import hotel.room.RoomServices;
-import hotel.roomReservation.RoomReservation;
-import hotel.roomReservation.RoomReservationServices;
 import ui.MenuUi;
 import util.Util;
 
@@ -36,6 +29,19 @@ public class Main {
                 } else if (option == 2) {
                     try {
                         System.out.println(facade.getGuestReservations());
+                        MenuUi.menuGuestReservations();
+                        option = Util.getInteger(scanner, "TYPE YOUR OPTION: ");
+                        if (option == 1) {
+                            int optionRemoveReservation = Util.getInteger(scanner, "ENTER THE RESERVATION NUMBER YOU WANT TO REMOVE (TYPE 0 TO GO BACK): ");
+                            if (optionRemoveReservation != 0) {
+                                try {
+                                    facade.deleteRoomReservation(optionRemoveReservation);
+                                    System.out.println("RESERVATION "+optionRemoveReservation+" SUCCESSFULLY DELETED");
+                                } catch (Exception exception) {
+                                    System.out.println(exception.getMessage());
+                                }
+                            }
+                        }
                     } catch (Exception exception) {
                         System.out.println(exception.getMessage());
                     }
@@ -49,8 +55,23 @@ public class Main {
                     System.out.println("=-=-=-=-=-=-= LOGIN GUEST =-=-=-=-=-=-=");
                     String ITR = Util.getString(scanner, "ENTER YOUR ITR: ");
                     String password = Util.getString(scanner, "ENTER YOUR PASSWORD: ");
-                    try{
+                    try {
                         facade.loginGuest(ITR, password);
+                    } catch (Exception exception) {
+                        System.out.println(exception.getMessage());
+                    }
+                } else if (option == 2) {
+                    System.out.println("=-=-=-=-=-=-=-= CREATE REGISTER =-=-=-=-=-=-=-=");
+                    String name = Util.getString(scanner, "ENTER YOUR NAME: ");
+                    String surname = Util.getString(scanner, "ENTER YOUR SURNAME: ");
+                    LocalDate dateOfBirth = Util.getLocalDate(scanner, "ENTER YOUR DATE OF BIRTH (YYYY-MM-DD): ");
+                    String ITR = Util.getString(scanner, "ENTER YOUR ITR: ");
+                    String numberPhone = Util.getString(scanner, "ENTER YOUR NUMBER PHONE: ");
+                    String identificationCard = Util.getString(scanner, "ENTER YOUR IDENTIFICATION CARD: ");
+                    String password = Util.getString(scanner, "ENTER YOUR PASSWORD: ");
+                    try {
+                        facade.createGuest(name, surname, dateOfBirth, ITR, numberPhone, identificationCard, password);
+                        System.out.println("GUEST " + name + " CREATED");
                     } catch (Exception exception) {
                         System.out.println(exception.getMessage());
                     }

@@ -40,6 +40,9 @@ public class Facade {
         return this.loggedGuest != null;
     }
 
+    public void createGuest(String name, String surname, LocalDate dateOfBirth, String ITR, String numberPhone, String identificationCard, String password) throws SQLException, RuntimeException{
+        guestServices.createGuest(name, surname, dateOfBirth, ITR, numberPhone, identificationCard, password);
+    }
     // Room
 
     public String getRooms() throws SQLException{
